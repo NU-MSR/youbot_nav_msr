@@ -11,16 +11,16 @@
   <include file="$(find youbot_driver_ros_interface)/launch/youbot_driver.launch" />
 
   <!-- laser angle filtering -->
-  <include file="$(find youbot_2dnav)/launch/laser_filter.launch" />
+  <include file="$(find youbot_nav_msr)/launch/laser_filter.launch" />
 
   <!-- Move base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_global_planner" value="navfn/NavfnROS" />  
-    <rosparam file="$(find youbot_2dnav)/config/costmap_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find youbot_2dnav)/config/costmap_params.yaml" command="load" ns="local_costmap" />
-    <!-- <rosparam file="$(find youbot_2dnav)/config/base_local_planner.yaml" command="load" /> -->
-    <rosparam file="$(find youbot_2dnav)/config/move_base_params.yaml" command="load" />
-    <rosparam file="$(find youbot_2dnav)/config/eband_planner_params.yaml" command="load"/>
+    <rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="local_costmap" />
+    <!-- <rosparam file="$(find youbot_nav_msr)/config/base_local_planner.yaml" command="load" /> -->
+    <rosparam file="$(find youbot_nav_msr)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find youbot_nav_msr)/config/eband_planner_params.yaml" command="load"/>
 
     <param name="base_local_planner" value="eband_local_planner/EBandPlannerROS" />
 

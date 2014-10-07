@@ -1,6 +1,6 @@
 <launch>
   <node pkg="laser_filters" type="scan_to_scan_filter_chain"
 	name="laser_filter">
-    <rosparam command="load" file="$(find youbot_2dnav)/launch/laser_angle_limit.yaml" />
+    <rosparam command="load" file="$(find youbot_nav_msr)/launch/laser_angle_limit.yaml" />
   </node>
 </launch>
