@@ -4,3 +4,13 @@ scan_filter_chain:
   params:
     lower_angle: -1.57
     upper_angle: 1.57
+- name: nanfilter
+  type: laser_filters/LaserScanNaNFilter
+
+# - name: laser_max_min
+#   type: laser_filters/LaserScanRangeFilter
+#   params:
+#     lower_threshold: 0.0
+#     upper_threshold: nan
+# - name: interpolation
+#   type: laser_filters/InterpolationFilter
