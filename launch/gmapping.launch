@@ -1,0 +1,30 @@
+<?xml version="1.0"?> 
+<launch>
+  <arg name="port" default="/dev/ttyACM0" />
+
+  <!-- laser transform -->
+  <node pkg="tf" type="static_transform_publisher" name="laser_scan_pub"
+		args="0.3 0.0 0.08 0.0 0.0 0.0 base_footprint laser 50" />
+
+  <!-- start hokuyo node -->
+  <node pkg="hokuyo_node" type="hokuyo_node" name="laser_driver_node" >
+    <param name="max_ang" value="1.57" />
+    <param name="min_ang" value="-1.57" />
+    <param name="port" value="$(arg port)" />
+  </node>
+
+  <!-- start youbot driver -->
+  <include file="$(find youbot_driver_ros_interface)/launch/youbot_driver.launch" />
+
+  <!-- start driving controls -->
+  <node pkg="youbot_teleop" type="youbot_joy_teleop" name="joy_teleop" />
+  <node pkg="joy" type="joy_node" name="joy_node" />
+  
+
+  <!-- start gmapping -->
+  <node pkg="gmapping" type="slam_gmapping" name="map_builder" output="screen">
+	<param name="base_frame" value="base_footprint" />
+  </node>
+
+
+</launch>
