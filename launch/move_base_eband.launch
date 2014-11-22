@@ -26,8 +26,9 @@
   <!-- Move base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_global_planner" value="navfn/NavfnROS" />  
-    <rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="local_costmap" />
+    <!-- <rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="global_costmap" /> -->
+	<rosparam file="$(find youbot_nav_msr)/config/global_costmap_params.yaml" command="load" ns="global_costmap" />
+	<rosparam file="$(find youbot_nav_msr)/config/costmap_params.yaml" command="load" ns="local_costmap" />
     <!-- <rosparam file="$(find youbot_nav_msr)/config/base_local_planner.yaml" command="load" /> -->
     <rosparam file="$(find youbot_nav_msr)/config/move_base_params.yaml" command="load" />
     <rosparam file="$(find youbot_nav_msr)/config/eband_planner_params.yaml" command="load"/>
@@ -47,6 +48,12 @@
     <!--param name="OMPLPlannerBase/interpolate_path" value="true" /-->
   </node>
 
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find youbot_nav_msr)/config/d110.yaml" />
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+  	<param name="base_frame_id" value="base_footprint" />
+  </node>
+  
   <!-- Publish markers to visualize voxel maps 
   <node name="global_costmap_viz" pkg="costmap_2d" type="costmap_2d_markers">
     <remap from="voxel_grid" to="move_base/global_costmap/obstacle_layer/voxel_grid"/>
